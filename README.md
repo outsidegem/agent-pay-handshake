@@ -1,39 +1,22 @@
-# @digital-mineral/agent-pay-handshake
+# @digital-mineral/agent-pay-handshake 🛑
 
-An x402-compliant middleware designed for the 2026 agentic economy. 
+**Enterprise Agent Payment Gateway and x402 Security Boundary.**
 
-This package allows developers to easily monetize their Edge compute, APIs, and AI infrastructure by requiring autonomous AI agents to perform micro-transactions before accessing resources. Optimized for the Base network and lightweight edge devices.
+Autonomous AI agents require specialized infrastructure to interact with paid APIs, inference models, and edge compute resources. This package operates as an HTTP 402 middleware "Toll Booth," strictly enforcing the **x402 payment protocol** while providing server-side spending controls to prevent agent bankruptcy.
 
-## Features
-- **x402 Protocol Native:** Standardized HTTP 402 "Payment Required" handshakes.
-- **Agent-Ready:** Designed for M2M (Machine-to-Machine) commerce via Smart Wallets.
-- **Edge Optimized:** Built with Hono for maximum performance on ARM64 architectures and edge nodes.
+### 🚀 Core Capabilities
+* **Zero-Trust Verification:** Natively parses and cryptographically verifies agent signatures (ECDSA/Ed25519 via `viem`) before granting resource access.
+* **Autonomous Agent Safety:** Hard-coded server-side spending limits prevent infinite agent execution loops from draining wallets. Agents cannot override these policies.
+* **Idempotency & Replay Protection:** Guaranteed exactly-once execution mapping transaction hashes to localized Redis/Memory locks.
+* **Resource Binding:** Cryptographically binds a signed payment proof specifically to the requested endpoint URL and method, eliminating cross-resource substitution attacks.
 
-## Installation
-\`\`\`bash
-npm install @digital-mineral/agent-pay-handshake
-\`\`\`
+### 🔌 Enterprise Integrations (The Titan Stack)
+This gateway serves as the ingress controller for the broader Digital Mineral DePIN ecosystem:
+1. **Agent Escrow Hook:** Interfaces with `@digital-mineral/agent-escrow` to halt payments exceeding risk thresholds for 1-bit human approval.
+2. **Telemetry Witness Hook:** Hands off verified payloads to `@digital-mineral/telemetry-witness` to generate cryptographic Proof-of-Compute receipts post-execution.
 
-## Quick Start
-Wrap your endpoints to require a micro-transaction before execution.
+### ⚠️ Security Limitations & Support
+* **Supported Networks:** Currently strictly validates EVM-compatible networks (Optimized for Base / Base Sepolia).
+* **Key Management:** This middleware operates purely on public verification. It does **not** manage private keys. Integrations with AWS KMS, HashiCorp Vault, or physical HSMs must be handled by the external settlement provider.
 
-\`\`\`typescript
-import { Hono } from 'hono';
-import { agentPayHandshake } from '@digital-mineral/agent-pay-handshake';
-
-const app = new Hono();
-
-app.use('/v1/secure-data', agentPayHandshake({
-  recipientAddress: '0xYourWalletAddress',
-  priceUsdc: '0.005',
-  chainId: 8453 // Base Network
-}));
-
-app.post('/v1/secure-data', (c) => {
-  return c.json({ data: "Highly valuable, verified data." });
-});
-\`\`\`
-
-## Powered By
-Developed by **Digital Mineral Solutions LLC**. 
-Building sovereign infrastructure for the DePIN and AI agent ecosystem.
+**Built with vision by Outside Gem.**

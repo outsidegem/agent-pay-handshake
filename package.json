@@ -1,14 +1,38 @@
 {
   "name": "@digital-mineral/agent-pay-handshake",
-  "version": "0.1.0",
-  "description": "x402 compliant middleware for agentic micro-transactions on Base",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "version": "1.0.0",
+  "description": "Enterprise x402 payment gateway for autonomous AI agents on the Base network.",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "!dist/**/*.test.*",
+    "!dist/cli/*.js.map"
+  ],
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "lint": "eslint src/ --ext .ts"
   },
   "dependencies": {
-    "hono": "^4.0.0",
-    "ethers": "^6.11.1"
-  }
+    "viem": "^2.9.0"
+  },
+  "peerDependencies": {
+    "hono": "^4.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^26.4.0",
+    "typescript": "^5.4.0",
+    "vitest": "^1.6.0"
+  },
+  "author": "Digital Mineral Solutions LLC",
+  "license": "MIT"
 }
