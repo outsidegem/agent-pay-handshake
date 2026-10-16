@@ -1,6 +1,6 @@
 {
   "name": "@digital-mineral/agent-pay-handshake",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Enterprise x402 payment gateway for autonomous AI agents on the Base network.",
   "type": "module",
   "main": "./dist/index.js",
@@ -8,7 +8,8 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.js"
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
     }
   },
   "files": [
@@ -31,7 +32,7 @@
   "devDependencies": {
     "@types/node": "^26.4.0",
     "typescript": "^5.4.0",
-    "vitest": "^1.6.0"
+    "vitest": "^4.1.11"
   },
   "author": "Digital Mineral Solutions LLC",
   "license": "MIT"
